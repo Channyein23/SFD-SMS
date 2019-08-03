@@ -1,6 +1,6 @@
 class AbstractHandler:
     def handle(self, request):
-        try:
+	try:
             request._next.handle(request)
         except AttributeError:
             pass
