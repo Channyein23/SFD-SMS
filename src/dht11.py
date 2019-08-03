@@ -197,6 +197,7 @@ class DHT11(handler.AbstractHandler):
             result = self.read()
             request['temp'] = result.temperature
             request['humid'] = result.humidity
+        print('DHT :', request)
         super().handle(request)
         
     def check(self, request):

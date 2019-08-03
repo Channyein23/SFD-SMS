@@ -23,6 +23,7 @@ class FIS(handler.AbstractHandler):
     def handle(self, request):
         if self.check(request):
             request['threat'] = self.compute(request.temp, request.humid)
+        print('Fuzzy :', request)
         super().handle(request)
     
     def check(self, request):
