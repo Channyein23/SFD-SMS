@@ -1,6 +1,6 @@
 import fuzzy
 import flame
-import dth11
+import dht11
 import sms
 
 if __name__ == '__main__':
