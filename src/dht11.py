@@ -1,6 +1,6 @@
 import time
 import RPi
-
+import handler
 
 class DHT11Result:
     'DHT11 sensor result returned by DHT11.read() method'
@@ -22,7 +22,7 @@ class DHT11Result:
         return self.error_code == DHT11Result.ERR_NO_ERROR
 
 
-class DHT11:
+class DHT11(handler.AbstractHandler):
     'DHT11 sensor reader class for Raspberry'
 
     __pin = 0
@@ -191,3 +191,13 @@ class DHT11:
 
     def __calculate_checksum(self, the_bytes):
         return the_bytes[0] + the_bytes[1] + the_bytes[2] + the_bytes[3] & 255
+    
+    def handle(self, request):
+        if self.check(request):
+            result = self.read()
+            request['temp'] = result.temperature
+            request['humid'] = result.humidity
+        super().handle(request)
+        
+    def check(self, request):
+        return 'temp' not in request or 'humid' not in request
