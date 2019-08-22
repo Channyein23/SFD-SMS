@@ -1,6 +1,6 @@
 import serial
 import RPi.GPIO as GPIO
-import OS, time
+import os, time
 import serial
 
 GPIO.setmode(GPIO.BOARD)
