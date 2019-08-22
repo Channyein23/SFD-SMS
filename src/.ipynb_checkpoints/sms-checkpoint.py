@@ -5,7 +5,7 @@ import serial
 
 GPIO.setmode(GPIO.BOARD)
 
-port = serial.Serial("/dev/ttyS0', baudrate=9600, timeout=1")
+port = serial.Serial("/dev/ttyAMA0', baudrate=9600, timeout=1")
 
 port.write('AT'+'\r\n'.encode('utf-8'))
 rcv = port.read(10)
