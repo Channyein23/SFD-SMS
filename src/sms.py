@@ -8,38 +8,38 @@ GPIO.setmode(GPIO.BOARD)
 
 class SMS(handler.AbstractHandler):
     def __init__(self):
-        port = serial.Serial("/dev/ttyAMA0', baudrate=9600, timeout=1")
+        self.port = serial.Serial('/dev/ttyAMA0', baudrate=9600, timeout=1)
     
     def handler(self, request):
-        if request['threat'] > 60:
-            pass
+        if request['threat'] > 15:
+            self.sendSMS(str(request))
         super().handle(request)
         
-    def sendSMS(self):
-        port.write('AT'+'\r\n'.encode('utf-8'))
-        rcv = port.read(10)
+    def sendSMS(self, message):
+        self.port.write('AT\r\n'.encode('utf-8'))
+        rcv = self.port.read(10)
         time.sleep(1)
 
-        port.write('ATE0'+'r\n'.encode('utf-8'))
-        rcv = port.read(10)
+        self.port.write('ATE0r\n'.encode('utf-8'))
+        rcv = self.port.read(10)
         time.sleep(1)
 
-        port.write('AT+CMGF=1'+'\r\n'.encode('utf-8'))
-        rcv = port.read(10)
+        self.port.write('AT+CMGF=1\r\n'.encode('utf-8'))
+        rcv = self.port.read(10)
         time.sleep(1)
 
-        port.write('AT+CNMI=2,1,0,0,0'+'\r\n'.encode('utf-8'))
-        rcv = port.read(10)
+        self.port.write('AT+CNMI=2,1,0,0,0\r\n'.encode('utf-8'))
+        rcv = self.port.read(10)
         time.sleep(1)
 
-        port.write('AT+CMGS="+959425624447"'+'\r\n')
-        rcv = port.read(10)
+        self.port.write('AT+CMGS="+959425624447"\r\n')
+        rcv = self.port.read(10)
         time.sleep(1)
 
-        port.write(message + '\r\n'.encode('utf-8'))
-        rcv = port.read(10)
+        self.port.write((message + '\r\n').encode('utf-8'))
+        rcv = self.port.read(10)
 
-        port.write("\x1A".encode('utf-8'))
+        self.port.write("\x1A".encode('utf-8'))
         for i in range(10):
-            rcv = port.read(10)
+            rcv = self.port.read(10)
             print (rcv)
