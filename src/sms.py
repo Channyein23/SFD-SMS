@@ -37,7 +37,7 @@ rcv = port.read(10)
 print (rcv)
 
 port.write("\x1A".encode('utf-8'))
-for i in range(10);
+for i in range(10):
 	rcv = port.read(10)
 	print (rcv)
 
