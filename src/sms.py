@@ -5,34 +5,34 @@ import serial
 
 GPIO.setmode(GPIO.BOARD)
 
-port = serial.Serial("/dev/ttyAMA0', baudrate=9600, timeout=1")
+port = serial.Serial("/dev/ttyAMA0", baudrate=9600, timeout=1)
 
-port.write('AT'+'\r\n'.encode('utf-8'))
+port.write('AT\r\n'.encode('utf-8'))
 rcv = port.read(10)
 print (rcv)
 time.sleep(1)
 
-port.write('ATE0'+'r\n'.encode('utf-8'))
+port.write('ATE0\r\n'.encode('utf-8'))
 rcv = port.read(10)
 print (rcv)
 time.sleep(1)
 
-port.write('AT+CMGF=1'+'\r\n'.encode('utf-8'))
+port.write('AT+CMGF=1\r\n'.encode('utf-8'))
 rcv = port.read(10)
 print (rcv)
 time.sleep(1)
 
-port.write('AT+CNMI=2,1,0,0,0'+'\r\n'.encode('utf-8'))
+port.write('AT+CNMI=2,1,0,0,0\r\n'.encode('utf-8'))
 rcv = port.read(10)
 print (rcv)
 time.sleep(1)
 
-port.write('AT+CMGS="+959425624447"'+'\r\n')
+port.write('AT+CMGS="+959425624447\r\n'.encode('utf-8'))
 rcv = port.read(10)
 print (rcv)
 time.sleep(1)
 
-port.write('Hello User'+'\r\n'.encode('utf-8'))
+port.write('Hello User\r\n'.encode('utf-8'))
 rcv = port.read(10)
 print (rcv)
 
