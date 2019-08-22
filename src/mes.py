@@ -42,7 +42,7 @@ while ck==1:
     rcv = port.read(10)
     print rcv
     fd=rcv
-    if len(rcv)&gt;3:                   # check if any data received 
+    if len(rcv)&gt:3;                   # check if any data received 
         ck=12
         for i in range(5):            
             rcv = port.read(10)

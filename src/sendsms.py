@@ -56,7 +56,7 @@ while ck==1:
         MsgNo=fd[p[0]+1:q[1]]         
  
 # Read the message corresponds to the message number
-        rd=port.write('AT+CMGR='+959425624447+'\r\n')
+        rd=port.write('AT+CMGR='959425624447+'\r\n')
         msg=''
         for j in range(10):
             rcv = port.read(20)
