@@ -3,7 +3,7 @@ import time
 
 channel = 21
 GPIO.setmode(GPIO.BOARD)
-GPIO.setup(channel, GPIO.IN)
+GPIO.setup(channel, GPIO.IN, pull_up_down = GPIO.PUD_UP)
 
 GPIO.add_event_detect(channel, GPIO.BOTH, bouncetime=300)
 
