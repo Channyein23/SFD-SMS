@@ -11,7 +11,7 @@ dht.set_next(fis)
 fis.set_next(sender)
 def onFlame():
     dht.handle({})
-    time.sleep(50000)
+    time.sleep(10)
 
 if __name__ == '__main__':
     flame.register_callback(onFlame)

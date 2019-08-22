@@ -8,7 +8,8 @@ class SMS(handler.AbstractHandler):
     def __init__(self):
         self.port = serial.Serial('/dev/ttyAMA0', baudrate=9600, timeout=1)
     
-    def handler(self, request):
+    def handle(self, request):
+        print('here')
         if request['threat'] > 15:
             self.sendSMS(str(request))
         super().handle(request)
@@ -30,7 +31,7 @@ class SMS(handler.AbstractHandler):
         rcv = self.port.read(10)
         time.sleep(1)
 
-        self.port.write('AT+CMGS="+959425624447"\r\n')
+        self.port.write('AT+CMGS="+959425624447"\r\n'.encode('utf-8'))
         rcv = self.port.read(10)
         time.sleep(1)
 
@@ -41,3 +42,7 @@ class SMS(handler.AbstractHandler):
         for i in range(10):
             rcv = self.port.read(10)
             print (rcv)
+
+if __name__ == '__main__':
+	sender = SMS()
+	sender.sendSMS('Hello')
