@@ -4,8 +4,6 @@ import os, time
 import serial
 import handler
 
-GPIO.setmode(GPIO.BOARD)
-
 class SMS(handler.AbstractHandler):
     def __init__(self):
         self.port = serial.Serial('/dev/ttyAMA0', baudrate=9600, timeout=1)
