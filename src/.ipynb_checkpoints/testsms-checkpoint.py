@@ -39,7 +39,7 @@ time.sleep(1)
 
 port.write('Hello User\r\n')  # Message
 rcv = port.read(10)
-print rcv
+print (rcv)
 
 port.write("\x1A".encode('utf-8'))# Enable to send SMS
 for i in range(10):
