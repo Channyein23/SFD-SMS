@@ -17,7 +17,7 @@ counter=0
 
           
 while 1:
-    ser.write('AT'+'\r\n')
+    ser.write('AT\r\n'.encode('utf-8'))
     time.sleep(1)
  
     x=ser.readline()
