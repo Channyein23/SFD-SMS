@@ -31,13 +31,13 @@ class FIS(handler.AbstractHandler):
     
     @classmethod
     def instance(cls):
-        temperature = control.Antecedent(np.arange(20, 101, 1), 'temperature')
+        temperature = control.Antecedent(np.arange(0, 101, 1), 'temperature')
         humidity = control.Antecedent(np.arange(0, 101, 1), 'humidity')
         result = control.Consequent(np.arange(0, 101, 1), 'result', defuzzify_method='centroid')
         
-        temperature['normal'] = fuzz.trapmf(temperature.universe, [20, 20, 30, 40])
-        temperature['hot'] = fuzz.trimf(temperature.universe, [30, 40, 50])
-        temperature['veryhot'] = fuzz.trapmf(temperature.universe, [40, 50, 100, 100])
+        temperature['normal'] = fuzz.trapmf(temperature.universe, [0, 0, 20, 40])
+        temperature['hot'] = fuzz.trimf(temperature.universe, [20, 40, 60])
+        temperature['veryhot'] = fuzz.trapmf(temperature.universe, [40, 60, 100, 100])
         humidity['dry'] = fuzz.trapmf(humidity.universe, [0, 0, 20, 40])
         humidity['medium'] = fuzz.trimf(humidity.universe, [20, 40, 60])
         humidity['wet'] = fuzz.trapmf(humidity.universe, [40, 60, 100, 100])
@@ -46,11 +46,11 @@ class FIS(handler.AbstractHandler):
         result['high'] = fuzz.trapmf(result.universe, [40, 60, 100, 100])
         
         rule1 = control.Rule(temperature['normal'] & humidity['dry'], result['medium'])
-        rule2 = control.Rule(temperature['normal'] & humidity['medium'], result['medium'])
+        rule2 = control.Rule(temperature['normal'] & humidity['medium'], result['low'])
         rule3 = control.Rule(temperature['normal'] & humidity['wet'], result['low'])
         rule4 = control.Rule(temperature['hot'] & humidity['dry'], result['high'])
         rule5 = control.Rule(temperature['hot'] & humidity['medium'], result['medium'])
-        rule6 = control.Rule(temperature['hot'] & humidity['wet'], result['low'])
+        rule6 = control.Rule(temperature['hot'] & humidity['wet'], result['medium'])
         rule7 = control.Rule(temperature['veryhot'] & humidity['dry'], result['high'])
         rule8 = control.Rule(temperature['veryhot'] & humidity['medium'], result['high'])
         rule9 = control.Rule(temperature['veryhot'] & humidity['wet'], result['high'])

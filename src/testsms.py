@@ -35,7 +35,7 @@ time.sleep(1)
 port.write('AT+CMGS="+959425624447"\r\n'.encode('utf-8'))
 rcv = port.read(10)
 print (rcv)
-time.sleep(1)
+tiime.sleep(1)
 
 port.write('Hello User\r\n'.encode('utf-8'))  # Message
 rcv = port.read(10)
