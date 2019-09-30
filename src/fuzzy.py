@@ -46,7 +46,7 @@ class FIS(handler.AbstractHandler):
         result['high'] = fuzz.trapmf(result.universe, [40, 60, 100, 100])
         
         rule1 = control.Rule(temperature['normal'] & humidity['dry'], result['medium'])
-        rule2 = control.Rule(temperature['normal'] & humidity['medium'], result['medium'])
+        rule2 = control.Rule(temperature['normal'] & humidity['medium'], result['low'])
         rule3 = control.Rule(temperature['normal'] & humidity['wet'], result['low'])
         rule4 = control.Rule(temperature['hot'] & humidity['dry'], result['high'])
         rule5 = control.Rule(temperature['hot'] & humidity['medium'], result['medium'])
